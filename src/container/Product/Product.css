@@ -1,0 +1,14 @@
+.header {
+  padding: 1rem;
+}
+
+.card {
+  padding: 1rem;
+  text-align: center;
+  line-height: 2rem;
+}
+
+.columns {
+  display: flex;
+  justify-content: space-between;
+}
