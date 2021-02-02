@@ -2,17 +2,16 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Product from '../Product/Product';
 import LifeCycleComp from '../LifeCycleComp/LifeCycleComp';
+import BlogHooks from '../Blog/BlogHooks';
 import Blog from '../Blog/Blog';
+import HomeComp from '../../component/Home/Home';
+import '../../index.css';
 
 class Home extends Component {
   state = {
     showComponent: true,
     dataBlog: []
   }
-
-  // componentDidMount() {
-  //   this.setShow();
-  // }
 
   setShow = () => {
     setTimeout(() => {
@@ -34,7 +33,9 @@ class Home extends Component {
           <LifeCycleComp />
           : null
         } */}
+        {/* <LifeCycleComp /> */}
         <Blog />
+        {/* <HomeComp /> */}
       </div>
     )
   }

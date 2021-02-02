@@ -12,11 +12,11 @@ class LifeCycleComp extends Component {
 
   componentDidMount() {
     console.log('componentDidMount');
-    setTimeout(() => {
-      this.setState({
-        count: 2
-      })
-    }, 3000)
+    // setTimeout(() => {
+    //   this.setState({
+    //     count: 2
+    //   })
+    // }, 3000)
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -25,13 +25,14 @@ class LifeCycleComp extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if (nextState.count > 4) return false;
-    return true;
+    console.log('LifeCycleComp ~ shouldComponentUpdate ~ shouldComponentUpdate')
+    // if (nextState.count > 4) return false;
+    // return true;
   }
 
   getSnapshotBeforeUpdate(prevProps, prevState) {
     console.log('getSnapshotBeforeUpdate');
-    return null;
+    // return null;
   }
 
   componentDidUpdate() {
