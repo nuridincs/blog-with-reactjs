@@ -4,8 +4,8 @@
 # install dependencies
 $ npm install
 
-# install JSON Server
-$ npm install -g json-server
+# run JSON Server
+$ json-server --watch db.json --port 3004
 
 # serve with hot reload at localhost:3000
 $ npm start
