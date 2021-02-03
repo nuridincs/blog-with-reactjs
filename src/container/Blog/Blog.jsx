@@ -1,80 +1,75 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Blog.css';
 import Post from '../../component/Post/Post';
 import BlogForm from './BlogForm';
-class Blog extends Component {
-  state = {
-    dataBlog: [],
+
+const Blog = () => {
+  const [state, setState] = useState({
     tmpBlogForm: null,
     tmpIsUpdate: false,
     showForm: false,
-  };
+  });
+  const [dataBlog, setStateBlog] = useState([]);
 
-  getPostData = async () => {
+  useEffect(() => {
+    getPostData();
+  }, []);
+
+  const getPostData = async () => {
     const { data } = await axios.get(
       'http://localhost:3004/posts?_sort=id&_order=desc'
     );
 
-    this.setState({
-      dataBlog: data.slice(0, 9),
-    });
+    setStateBlog(data.slice(0, 9));
   };
 
-  handleRemove = (data) => {
+  const handleRemove = (data) => {
     axios.delete(`http://localhost:3004/posts/${data}`).then((res) => {
-      this.getPostData();
+      getPostData();
     });
   };
 
-  handleUpdate = (data) => {
-    this.setState({
-      tmpBlogForm: data,
-      tmpIsUpdate: true,
-    });
+  const handleUpdate = (data) => {
+    setState({ ...state, tmpBlogForm: data, tmpIsUpdate: true });
   };
 
-  handleButton = () => {
-    this.setState({ showForm: !this.state.showForm });
+  const handleButton = () => {
+    setState({ ...state, showForm: !state.showForm });
   };
 
-  componentDidMount() {
-    this.getPostData();
-  }
+  const buttonText = state.showForm ? 'Hide Form' : 'Show Form';
 
-  render() {
-    const { dataBlog, showForm } = this.state;
-    const buttonText = this.state.showForm ? 'Hide Form' : 'Show Form';
-
-    return (
-      <>
-        <h1 className="text-center text-5xl p-5">Blog</h1>
-        <div className="text-center">
-          <button
-            className="bg-blue-500 rounded-sm p-2 text-white font-semibold"
-            onClick={this.handleButton}
-          >
-            {buttonText}
-          </button>
-        </div>
-        {showForm && (
-          <BlogForm
-            reInit={() => this.getPostData()}
-            formData={this.state.tmpBlogForm}
-            isUpdate={this.state.tmpIsUpdate}
-          />
-        )}
+  return (
+    <>
+      <h1 className="text-center text-5xl p-5">Blog</h1>
+      <div className="text-center">
+        <button
+          className="bg-blue-500 rounded-sm p-2 text-white font-semibold"
+          onClick={handleButton}
+        >
+          {buttonText}
+        </button>
+      </div>
+      {state.showForm && (
+        <BlogForm
+          reInit={() => getPostData()}
+          formData={state.tmpBlogForm}
+          isUpdate={state.tmpIsUpdate}
+        />
+      )}
+      <div className="">
         {dataBlog.map((data) => (
           <Post
             key={data.id}
             data={data}
-            remove={this.handleRemove}
-            update={this.handleUpdate}
+            remove={handleRemove}
+            update={handleUpdate}
           />
         ))}
-      </>
-    );
-  }
-}
+      </div>
+    </>
+  );
+};
 
 export default Blog;
