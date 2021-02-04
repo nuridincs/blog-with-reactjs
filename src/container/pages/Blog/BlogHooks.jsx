@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { getBlog } from '../../stores/Blog/action';
+import { getBlog } from '../../../stores/Blog/action';
 import { useDispatch, useSelector } from 'react-redux';
 
 import './Blog.css';
-import Post from '../../component/Post/Post';
+import Post from '../../../component/Post/Post';
 
 const BlogHooks = (props) => {
   const dispatch = useDispatch();

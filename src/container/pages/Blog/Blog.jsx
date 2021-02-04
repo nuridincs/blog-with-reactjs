@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Blog.css';
-import Post from '../../component/Post/Post';
+import Post from '../../../component/Post/Post';
 import BlogForm from './BlogForm';
 
-const Blog = () => {
+const Blog = (props) => {
   const [state, setState] = useState({
     tmpBlogForm: null,
     tmpIsUpdate: false,
@@ -38,6 +38,10 @@ const Blog = () => {
     setState({ ...state, showForm: !state.showForm });
   };
 
+  const handleDetail = (id) => {
+    props.history.push(`detail-post/${id}`);
+  };
+
   const buttonText = state.showForm ? 'Hide Form' : 'Show Form';
 
   return (
@@ -58,6 +62,17 @@ const Blog = () => {
           isUpdate={state.tmpIsUpdate}
         />
       )}
+      {/* <div className="container mx-auto">
+        <div className="grid grid-cols-3 gap-4">
+          <div className="border-2 border-red-500">
+            Will grow and shrink as needed
+          </div>
+          <div className="border-2 border-red-500">Will not grow or shrink</div>
+          <div className="border-2 border-red-500">
+            Will grow and shrink as needed
+          </div>
+        </div>
+      </div> */}
       <div className="">
         {dataBlog.map((data) => (
           <Post
@@ -65,6 +80,7 @@ const Blog = () => {
             data={data}
             remove={handleRemove}
             update={handleUpdate}
+            detailPost={handleDetail}
           />
         ))}
       </div>

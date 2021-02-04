@@ -3,7 +3,7 @@ import {
   IS_LOADING,
   INCREMENT_ORDER,
   DECREMENT_ORDER,
-} from './Common/constant';
+} from './constant';
 
 const initialState = {
   blogs: [],
@@ -11,7 +11,8 @@ const initialState = {
   totalOrder: 0,
 };
 
-const appReducer = (state = initialState, action) => {
+const blogReducer = (state = initialState, action) => {
+  console.log('blogReducer ~ action', action);
   switch (action.type) {
     case GET_BLOG:
       return { ...state, blogs: action.payload };
@@ -38,4 +39,4 @@ const appReducer = (state = initialState, action) => {
   }
 };
 
-export default appReducer;
+export default blogReducer;
