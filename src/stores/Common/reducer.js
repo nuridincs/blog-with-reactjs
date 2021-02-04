@@ -12,7 +12,6 @@ const initialState = {
 };
 
 const blogReducer = (state = initialState, action) => {
-  console.log('blogReducer ~ action', action);
   switch (action.type) {
     case GET_BLOG:
       return { ...state, blogs: action.payload };

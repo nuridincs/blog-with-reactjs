@@ -1,41 +1,8 @@
-import {
-  GET_BLOG,
-  IS_LOADING,
-  INCREMENT_ORDER,
-  DECREMENT_ORDER,
-} from './Common/constant';
+import { combineReducers } from 'redux';
+import commonReducer from './Common/reducer';
 
-const initialState = {
-  blogs: [],
-  isLoading: false,
-  totalOrder: 0,
-};
-
-const appReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case GET_BLOG:
-      return { ...state, blogs: action.payload };
-    case IS_LOADING:
-      return { ...state, isLoading: action.payload };
-    case INCREMENT_ORDER:
-      return {
-        ...state,
-        totalOrder: state.totalOrder + 1,
-      };
-    case DECREMENT_ORDER:
-      let totalOrder = 0;
-
-      if (state.totalOrder > 0) {
-        totalOrder = state.totalOrder - 1;
-      }
-
-      return {
-        ...state,
-        totalOrder: totalOrder,
-      };
-    default:
-      return state;
-  }
-};
+const appReducer = combineReducers({
+  common: commonReducer,
+});
 
 export default appReducer;

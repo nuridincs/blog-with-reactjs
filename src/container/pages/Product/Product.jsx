@@ -3,12 +3,12 @@ import CardProduct from './CardProduct';
 import { useSelector } from 'react-redux';
 import './Product.css';
 
-const Product = (props) => {
-  const order = useSelector((state) => state.totalOrder);
+const Product = () => {
+  const { totalOrder } = useSelector((state) => state.common);
 
   return (
     <>
-      <div className="header">Total Cart = {order}</div>
+      <div className="header">Total Cart = {totalOrder}</div>
 
       <CardProduct />
     </>

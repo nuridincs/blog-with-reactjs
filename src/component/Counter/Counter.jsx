@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './Counter.css';
 
 const Counter = () => {
-  const { totalOrder } = useSelector((state) => state);
+  const { totalOrder } = useSelector((state) => state.common);
   const dispatch = useDispatch();
 
   const handlePlus = () => dispatch({ type: 'INCREMENT_ORDER' });
